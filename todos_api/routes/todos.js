@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var db = require('../models');
-var helpers = require('../helpers/todos');
+const express = require('express');
+const router = express.Router();
+const db = require('../models');
+const helpers = require('../helpers/todos');
 
 router
   .route('/')
@@ -14,4 +14,4 @@ router
   .put(helpers.updateTodo)
   .delete(helpers.deleteTodo);
 
-module.exports = router;
+module.exports = { router };

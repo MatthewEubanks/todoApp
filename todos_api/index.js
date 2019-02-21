@@ -1,10 +1,14 @@
-var express = require('express');
-app = express();
-bodyParser = require('body-parser');
+const express = require('express');
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
-const PORT = 3000;
+const { DATABASE_URL, PORT } = require('./config');
 
-var todoRoutes = require('./routes/todos');
+const app = express();
+const bodyParser = require('body-parser');
+
+const { router: todoRouter } = require('./routes/todos');
+// var todoRoutes = require('./routes/todos');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -15,7 +19,7 @@ app.get('/', function(req, res) {
   res.sendFile('index.html');
 });
 
-app.use('/api/todos', todoRoutes);
+app.use('/api/todos', todoRouter);
 
 app.listen(PORT, function() {
   console.log('APP IS RUNNING ON PORT ' + PORT);
